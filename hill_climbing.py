@@ -36,9 +36,7 @@ def subida_encosta():
     atual = list(range(9))
     random.shuffle(atual)
     custo_atual = calcular_custo(atual)
-    iteracoes = 0
     
-
     while time.time() - inicio < 15:  # Limite de 15 segundos
         vizinhos = gerar_vizinhos(atual)
         melhor_vizinho = min(vizinhos, key=calcular_custo)
@@ -47,16 +45,14 @@ def subida_encosta():
         if melhor_custo < custo_atual:
             atual = melhor_vizinho
             custo_atual = melhor_custo
-            iteracoes += 1
         else:
             break  # Nenhuma melhoria encontrada
 
     tempo_total = time.time() - inicio
-    return atual, custo_atual, tempo_total, iteracoes
+    return atual, custo_atual, tempo_total
 
 # Executar o algoritmo
-solucao, custo_total, tempo_execucao, iteracoes = subida_encosta()
+solucao, custo_total, tempo_execucao = subida_encosta()
 print("Solução encontrada (empresa -> projeto):", solucao)
 print("Custo total da solução:", custo_total)
-print(f"Tempo de execução: {tempo_execucao:.6f} segundos")
-print(f"Total de iterações realizadas: {iteracoes}")
+print(f"Tempo de execução: {tempo_execucao:.4f} segundos")
